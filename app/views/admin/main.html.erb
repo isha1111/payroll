@@ -1,0 +1,65 @@
+<div class="notice">
+    <% if flash[:notice] %>
+    <%= flash[:notice] %>
+    <% end %>
+</div>
+<div class="row main-row">
+  <form action="/employee/new" method="get">
+    <button class="btn">Add Employee</button>
+  </form>
+  <form  action="/site/new" method="get">
+    <button class="btn">Add Work Site</button>
+  </form>
+  <form action="/timesheet/new">
+    <button class="btn">Add Timesheets</button>
+  </form>
+  <form action="/delete/admin" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <button class="btn" id="logout-btn">Logout</button>
+  </form>
+</div>
+<div class="row">
+  <h3>Employee Details</h3>
+  <table>
+  <tr>
+    <td>Name</td>
+    <td>Date Of Birth</td>
+    <td>Contact Number</td>
+    <td>Email </td>
+    <td>Address</td>
+    <td>Timesheets</td>
+  </tr>
+  <% @employees.each do |employee| %>
+  <tr class="linkable-row" >
+      <td onclick="document.location = '/employee/<%= employee.id %>'"><%= employee.name %></td>
+      <td onclick="document.location = '/employee/<%= employee.id %>'"><%= employee.dob %></td>
+      <td onclick="document.location = '/employee/<%= employee.id %>'"><%= employee.PhoneNumber %></td>
+      <td onclick="document.location = '/employee/<%= employee.id %>'"><%= employee.email %></td>
+      <td onclick="document.location = '/employee/<%= employee.id %>'"><%= employee.address %></td>
+      <td><a href="/timesheet/view/<%= employee.id %>" style="font-size:15px;color:red;">View Timesheets</a></td>
+  </tr>
+  <% end %>
+  </table>
+</div>
+
+<h3>Work Locations</h3>
+<div class="row">
+  <table>
+  <tr>
+    <td>Site Number</td>
+    <td>Site Name </td>
+    <td>Site Location</td>
+  </tr>
+  <% @sites.each do |site| %>
+  <tr  onclick="document.location = '/site/<%= site.id %>'" class="linkable-row">
+    <td><%= site.id %></td>
+    <td><%= site.site_name %></td>
+    <td><%= site.site_location %></td>
+  </tr>
+  <% end %>
+  </table>
+</div>
+
+<footer>
+  
+</footer>

@@ -1,0 +1,18 @@
+<div class="notice">
+    <% if flash[:notice] %>
+    <%= flash[:notice] %>
+    <% end %>
+</div>
+<div class="form-container form-div">
+    <h3>Welcome to XYZ</h3>
+    <form class="" action="/session/admin" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <label for="">Username</label><input type="text" name="username" value="" required="true">
+      <label for="">Password</label><input name="password" value="" type="password" required="true">
+      </br><button class="btn">Login</button>
+    </form>
+    <form class="" action="/admin/new" method="get">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <button class="btn">Sign Up</button>
+    </form>
+</div>

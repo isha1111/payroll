@@ -1,0 +1,25 @@
+Employee Id <%= params[:id] %>
+<% employee = Employee.find_by(id: params[:id]) %>
+
+<form class="" action="/employee/edit/<%= params[:id]%>" method="post">
+  <label>Name</label>
+  <input name="fname" value="<%= employee.name %>">
+  <label>Date Of Birth</label>
+  <input name="dob" value="<%= employee.dob %>" type="date">
+  <label>Email</label>
+  <input name="email" value="<%= employee.email %>" type="email">
+  <label>Phone Number</label>
+  <input name="phone" value="<%= employee.PhoneNumber %>">
+  <label>Address</label>
+  <input name="address" value="<%= employee.address %>">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  </br>
+  <button class="btn">Save</button>
+</form>
+
+<form class="" action="/employee/delete/<%= params[:id] %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <button class="btn">Delete</button>
+  <a href="/admin/login"><button class="btn">Cancel</button></a>
+</form>

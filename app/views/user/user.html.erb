@@ -1,0 +1,16 @@
+Details
+
+
+  Basic Information<br>
+  <label for="">Full Name</label><input name="fname" value=""><br>
+  <label for="">Date of Birth</label><input type="date" name="dob" value=""><br>
+
+  Contact Information<br>
+  <label for="">Phone Number</label><input name="phone" value=""><br>
+  <label for="">Email</label><input type="email" name="email" value=""><br>
+  <label for="">Full Address</label><input name="address1" value=""><br>
+
+  <form action="/user" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <button>Save</button>
+  </form>

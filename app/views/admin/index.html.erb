@@ -1,0 +1,33 @@
+<div class="notice">
+    <% if flash[:notice] %>
+    <%= flash[:notice] %>
+    <% end %>
+</div>
+<div class="container">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="row" style="display:inline;">
+        <a href="#" class="menu-item">About Us</a>
+        <a href="#" class="menu-item">Services</a>
+        <a href="#" class="menu-item">Contact</a>
+    <div style="display:inline;float:right;">
+        <form class="" action="/adminlogin" method="get">
+          <button class="btn">Admin Login</button>
+        </form>
+        <form class="" action="/userlogin" method="get">
+          <button class="btn">Employee Login</button>
+        </form>
+    </div>
+    </div>
+
+</div>
+<div class="form-container">
+
+</div>
+
+<div class="form-container" style="width:40%;float:left;margin-left:35px;">
+
+</div>
+
+<div class="form-container" style="width:40%;float:right;margin-right:35px;">
+
+</div>

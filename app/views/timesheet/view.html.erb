@@ -1,0 +1,38 @@
+<h3>Timesheets of <%= @employee.name %></h3>
+
+<table>
+<tr>
+  <td>Employee Name</td>
+  <td>Hours</td>
+  <td>Day</td>
+  <td>Site</td>
+</tr>
+<% @timesheets.each do |timesheet| %>
+<tr>
+  <td><%= @employee.name %></td>
+  <td><%= timesheet.hours  %></td>
+  <td><%= timesheet.day %></td>
+  <td><%= Site.find_by(id:timesheet.site_id).site_name %></td>
+</tr>
+<% end %>
+</table>
+<div class="form-container">
+  <input type="hidden" id="id" value="<%= @employee.id %>">
+  <strong>Calculate Hours from</strong> <input type="date" id="sweek"> to <input type="date" id="eweek">
+  <button class="btn">Calculate</button></br>
+  <span id="hours-worked" style="text-align:center;"></span>
+</div>
+<script>
+    $('.btn').on('click', function () {
+      $.ajax({
+        url: "/timesheet/hours/",
+        method: 'get',
+        data: {id: $('#id').val(), sweek: $('#sweek').val(), eweek: $('#eweek').val()}
+      }).done(function(data){
+        $('#hours-worked').text(data+"Hours Worked");
+      });
+    });
+
+
+
+</script>

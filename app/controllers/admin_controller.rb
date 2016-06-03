@@ -7,8 +7,12 @@ def login
 end
 
 def main
-  @employees = Employee.all
-  @sites = Site.all
+  if logged_in?
+    @employees = Employee.all
+    @sites = Site.all
+  else
+    redirect_to '/adminlogin'
+  end
 end
 
 def login_admin

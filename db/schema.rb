@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602021851) do
+ActiveRecord::Schema.define(version: 20160618012640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160602021851) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "PhoneNumber"
+    t.date     "startDate"
   end
 
   create_table "salaries", force: :cascade do |t|
@@ -46,7 +47,6 @@ ActiveRecord::Schema.define(version: 20160602021851) do
     t.string   "site_location"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "timesheet_id"
   end
 
   create_table "timesheets", force: :cascade do |t|
@@ -56,6 +56,9 @@ ActiveRecord::Schema.define(version: 20160602021851) do
     t.date     "day"
     t.integer  "employee_id"
     t.integer  "site_id"
+    t.time     "startTime"
+    t.time     "endTime"
+    t.string   "site_name"
   end
 
   create_table "users", force: :cascade do |t|

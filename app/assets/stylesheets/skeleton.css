@@ -168,7 +168,7 @@ a {
   line-height: 1;
 }
 a:hover {
-  color: white; }
+  color: gray; }
 
 a:before {
   -webkit-transition: all 0.7s ease;
@@ -327,11 +327,9 @@ form {
 
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-hr {
-  margin-top: 5em;
-  margin-bottom: 5em;
+hr {hr
   border-width: 0;
-  border-top: 3px solid #FFFFFF; }
+  border-top: 3px solid black; }
 
 
 /* Clearing

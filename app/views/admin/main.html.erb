@@ -1,8 +1,3 @@
-<div class="notice">
-    <% if flash[:notice] %>
-    <%= flash[:notice] %>
-    <% end %>
-</div>
 <div class="row main-row">
   <form action="/employee/new" method="get">
     <button class="btn">Add Employee</button>
@@ -13,13 +8,16 @@
   <form action="/timesheet/new">
     <button class="btn">Add Timesheets</button>
   </form>
+  <form action="/timesheet/edit">
+    <button class="btn">Edit Timesheets</button>
+  </form>
   <form action="/delete/admin" method="post">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     <button class="btn" id="logout-btn">Logout</button>
   </form>
 </div>
-<div class="row">
-  <h3>Employee Details</h3>
+<h3>Employee Details</h3>
+<div class="row" id="emp-table">
   <table>
   <tr>
     <td>Name</td>
@@ -42,24 +40,45 @@
   </table>
 </div>
 
-<h3>Work Locations</h3>
-<div class="row">
+<div class="center"><strong>Download Employees Data as </strong><%= link_to "Excel Sheet", employees_path(format: "xls") %></div>
+
+<h3>Work Sites</h3>
+<div class="row" id="site-table">
   <table>
   <tr>
     <td>Site Number</td>
     <td>Site Name </td>
     <td>Site Location</td>
+    <td>Employees</td>
   </tr>
   <% @sites.each do |site| %>
-  <tr  onclick="document.location = '/site/<%= site.id %>'" class="linkable-row">
-    <td><%= site.id %></td>
-    <td><%= site.site_name %></td>
-    <td><%= site.site_location %></td>
+  <tr class="linkable-row">
+    <td id="site-id" onclick="document.location = '/site/<%= site.id %>'"><%= site.id %></td>
+    <td onclick="document.location = '/site/<%= site.id %>'"><%= site.site_name %></td>
+    <td onclick="document.location = '/site/<%= site.id %>'"><%= site.site_location %></td>
+    <td><a id="employee-working" style="font-size:15px;color:red;" href="/site/employee/<%= site.id %>">View Employees</a></td>
   </tr>
   <% end %>
   </table>
 </div>
 
+<span id="employee-list"></span>
+
+<div class="center"><strong>Download Sites Data as </strong><%= link_to "Excel Sheet", sites_path(format: "xls") %></div>
+
+<script type="text/javascript">
+$('#employee-working').on('click', function () {
+  $.ajax({
+    url: "/site/employee/",
+    method: 'get',
+    data: {id: $('#site-id').val()}
+  }).done(function(data){
+    console.log(data);
+    $('#employee-list').text(data);
+  });
+});
+
+</script>
+
 <footer>
-  
 </footer>

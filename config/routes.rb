@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
   get '/' => 'admin#index'
+  get '/EAST-WEST-Employees' => 'admin#employee_data' , :as => :employees
+  get '/EAST-WEST-Sites' => 'admin#site_data' , :as => :sites
+  post '/submit' => 'admin#submit'
+  get '/services' => 'admin#services'
+  get '/contact' => 'admin#contact'
   get '/adminlogin' => 'admin#login_admin'
   get '/admin/login' => 'admin#main'
   get '/admin/new' => 'admin#new_admin'
@@ -20,6 +25,9 @@ Rails.application.routes.draw do
   get '/site/:id' => 'site#show'
   delete '/site/delete/:id' => 'site#delete'
   post '/site/edit/:id' => 'site#edit'
+  get '/site/employee' => 'site#employee'
+  get 'site/employee/:id' => 'site#view_emp'
+
 
   get '/employee/new' => 'employee#new_emp'
   post '/employee/create' => 'employee#create'
@@ -31,6 +39,10 @@ Rails.application.routes.draw do
   post 'timesheet/create' => 'timesheet#create'
   get '/timesheet/view/:id' => 'timesheet#view'
   get '/timesheet/hours' => 'timesheet#hours'
-
+  post '/timesheet/save' => 'timesheet#save'
+  get '/timesheet/days' => 'timesheet#days'
+  get '/timesheet/edit' => 'timesheet#edit'
+  get '/timesheet/check' => 'timesheet#check'
+  get '/timesheet/delete/:id' => 'timesheet#delete'
 
 end

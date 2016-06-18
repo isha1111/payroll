@@ -1,38 +1,62 @@
 <h3>Timesheets of <%= @employee.name %></h3>
-
-<table>
-<tr>
-  <td>Employee Name</td>
-  <td>Hours</td>
-  <td>Day</td>
-  <td>Site</td>
-</tr>
-<% @timesheets.each do |timesheet| %>
-<tr>
-  <td><%= @employee.name %></td>
-  <td><%= timesheet.hours  %></td>
-  <td><%= timesheet.day %></td>
-  <td><%= Site.find_by(id:timesheet.site_id).site_name %></td>
-</tr>
-<% end %>
-</table>
 <div class="form-container">
   <input type="hidden" id="id" value="<%= @employee.id %>">
-  <strong>Calculate Hours from</strong> <input type="date" id="sweek"> to <input type="date" id="eweek">
-  <button class="btn">Calculate</button></br>
+  <span class="center"><h5>Calculate Hours</h5></span>
+  Starting from <input type="date" id="sweek"> to <input type="date" id="eweek"></br>
+  <button class="btn" id="calc-hours-btn">Calculate</button>
   <span id="hours-worked" style="text-align:center;"></span>
 </div>
+<div class="center form-container">
+  <input type="date" id="sday"> to <input type="date" id="eday"></br>
+  <button id="filter-btn" class="btn">Filter Results</button>
+  <a href="/admin/login"><button class="btn">Go Back</button></a></br>
+  <div id="employee-data">
+    <table>
+    <tr>
+      <th>Employee Name</th>
+      <th>Hours</th>
+      <th>Day</th>
+      <th>Site</th>
+    </tr>
+    <% @timesheets.each do |timesheet| %>
+    <tr>
+      <td><%= @employee.name %></td>
+      <td><%= timesheet.hours  %></td>
+      <td><%= timesheet.day %></td>
+      <td><%= Site.find_by(id:timesheet.site_id).site_name %></td>
+    </tr>
+    <% end %>
+    </table>
+  </div>
+</div>
 <script>
-    $('.btn').on('click', function () {
+    $('#calc-hours-btn').on('click', function() {
       $.ajax({
         url: "/timesheet/hours/",
-        method: 'get',
+        method: "get",
         data: {id: $('#id').val(), sweek: $('#sweek').val(), eweek: $('#eweek').val()}
       }).done(function(data){
-        $('#hours-worked').text(data+"Hours Worked");
+        $('#hours-worked').text(data+" Hours Worked");
       });
     });
-
-
-
+    $('#filter-btn').on('click', function() {
+      $.ajax({
+        url: "/timesheet/days/",
+        method: "get",
+        data: {id: $('#id').val(), sday: $('#sday').val(), eday: $('#eday').val()}
+      }).done(function(data) {
+        $('#employee-data').empty();
+        $('#employee-data').append("<span>Maximum data 30 days</span>");
+        $('#employee-data').append("<table id='employee-table'></table>");
+        $('#employee-table').append("<tr><th>Hours</th><th>Day</th><th>Site</th></tr>");
+        for(var i=0; i<30; i++) {
+          if (data[i] != undefined) {
+            var hours = data[i]["hours"];
+            var day = data[i]["day"];
+            var site = data[i]["site_name"]
+            $('#employee-table').append("<tr><td>"+hours+"</td><td>"+day+"</td><td>"+site+"</td></tr>");
+          }
+        }
+      });
+    });
 </script>

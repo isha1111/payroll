@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <table border="1">
+      <tr>
+        <th>Name</th>
+        <th>DOB</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>PhoneNumber</th>
+      </tr>
+      <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.name %></td>
+        <td><%= employee.dob %></td>
+        <td><%= employee.email %></td>
+        <td><%= employee.address %></td>
+        <td><%= employee.PhoneNumber %></td>
+      </tr>
+      <% end %>
+    </table>
+  </Worksheet>
+</Workbook>

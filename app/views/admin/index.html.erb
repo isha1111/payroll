@@ -1,14 +1,9 @@
-<div class="notice">
-    <% if flash[:notice] %>
-    <%= flash[:notice] %>
-    <% end %>
-</div>
 <div class="container">
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="row" style="display:inline;">
         <a href="#" class="menu-item">About Us</a>
-        <a href="#" class="menu-item">Services</a>
-        <a href="#" class="menu-item">Contact</a>
+        <a href="/services" class="menu-item">Services</a>
+        <a href="/contact" class="menu-item">Contact</a>
     <div style="display:inline;float:right;">
         <form class="" action="/adminlogin" method="get">
           <button class="btn">Admin Login</button>
@@ -20,14 +15,14 @@
     </div>
 
 </div>
-<div class="form-container">
 
+<div class="name">
+  <hr>
+  <h1 id="company-name">East-West Guarding Victoria</h1>
+  <span class="sub-heading">Giving You a Piece of mind</span>
+  <hr>
+  <%= image_tag("security-services.jpg", :id => "main-img")  %>
 </div>
-
-<div class="form-container" style="width:40%;float:left;margin-left:35px;">
-
-</div>
-
-<div class="form-container" style="width:40%;float:right;margin-right:35px;">
-
+<div class="footer">
+  <span>&copy; East West Guarding Victoria 2016</span>
 </div>

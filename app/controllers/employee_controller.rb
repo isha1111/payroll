@@ -4,17 +4,16 @@ class EmployeeController < ApplicationController
   end
 
   def create
-
     employee = Employee.new
     employee.name = params[:fname]
     employee.dob = params[:dob]
     employee.email= params[:email]
     employee.address= params[:address1]
     employee.PhoneNumber= params[:phone]
+    employee.startDate= params[:joindate]
     employee.save
     flash[:notice] = "Employee Added Successfully"
     redirect_to '/admin/login'
-
   end
 
   def show

@@ -1,25 +1,41 @@
 require "date"
-
+require "pony"
 class TimesheetController < ApplicationController
 
   def new
-    @employees = Employee.all
-    @sites = Site.all
+    if logged_in?
+      @employees = Employee.all
+      @sites = Site.all
+    else
+      redirect_to '/adminlogin'
+    end
   end
 
   def create
-    timesheet = Timesheet.new
-    timesheet.hours = params[:hours]
-    timesheet.day = params[:day]
-    timesheet.employee_id = params[:ename]
-    timesheet.site_id = params[:site]
-    timesheet.save
-    redirect_to '/admin/login'
+    if logged_in?
+      timesheet = Timesheet.new
+      timesheet.hours = params[:hours]
+      timesheet.startTime = params[:stime]
+      timesheet.endTime = params[:etime]
+      timesheet.day = params[:day]
+      timesheet.employee_id = params[:ename]
+      timesheet.site_id = params[:site]
+      timesheet.site_name = Site.find(params[:site]).site_name
+      timesheet.save
+      flash[:notice] = "Timesheet Added Successfully"
+      redirect_to '/admin/login'
+    else
+      redirect_to '/adminlogin'
+    end
   end
 
   def view
-    @employee = Employee.find(params[:id])
-    @timesheets = @employee.timesheets
+    if logged_in?
+      @employee = Employee.find(params[:id])
+      @timesheets = @employee.timesheets
+    else
+      redirect_to '/adminlogin'
+    end
   end
 
   def hours
@@ -38,6 +54,39 @@ class TimesheetController < ApplicationController
       end
     end
     render :json => @total
+  end
+
+  def save
+  end
+
+  def edit
+    @employees = Employee.all
+  end
+
+  def check
+    if logged_in?
+      @timesheets = Timesheet.where(employee_id: params[:id])
+      render :json => @timesheets
+    else
+      redirect_to '/adminlogin'
+    end
+  end
+
+  def days
+    @employee = Employee.find_by(id: params[:id])
+    @timesheets = Timesheet.where(day: params[:sday].. params[:eday])
+    render :json => @timesheets
+  end
+
+  def delete
+    if logged_in?
+      timesheet = Timesheet.find_by(id: params[:id])
+      timesheet.destroy
+      flash[:notice] = "Timesheet deleted Successfully"
+      redirect_to '/admin/login'
+    else
+      redirect_to '/adminlogin'
+    end
   end
 
 end

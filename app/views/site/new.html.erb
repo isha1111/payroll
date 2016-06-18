@@ -1,9 +1,9 @@
 <form action="/site/create" method="post">
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   <label>Site Name</label>
-  <input name="sname" value="" type="text">
+  <input name="sname" value="" type="text" required="true">
   <label>Site Location</label>
-  <input name="slocation" value="" type="text">
+  <input name="slocation" value="" type="text" required="true">
   <button class="btn">Save</button>
   <a href="/admin/login"><button class="btn">Cancel</button></a>
 </form>

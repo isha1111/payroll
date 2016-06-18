@@ -28,4 +28,72 @@ footer {
 
 .menu-item {
   padding: 0 15px;
+  font-weight: bold;
+  line-height: 35px;
+}
+
+.employee-list {
+  text-align: center;
+  font-size: 20px;
+  text-decoration: none;
+  padding-top: 10px;
+}
+
+.center {
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+#company-name {
+  animation: name 10s ease-out infinite;
+}
+
+@keyframes name {
+  0% {
+    opacity: 1;
+    transform: scale(1.5) ;
+  }
+  20% {
+    opacity: 1;
+  }
+  89% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: .2;
+  }
+}
+.name {
+  height: 15%;
+  left: 50%;
+  position: absolute;
+  top: 17%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin-top: -15px;
+}
+
+#emp-table {
+  width: 80%;
+  background-color: #EAD1CE;
+  margin: 0 auto;
+  height: 200px;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+
+#site-table {
+  width: 80%;
+  background-color: #EAD1CE;
+  margin: 0 auto;
+  height: 200px;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+
+.services-heading {
+  font-family: 'Lato', sans-serif;
 }

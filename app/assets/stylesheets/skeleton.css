@@ -225,6 +225,9 @@ legend {
   display: block;
   margin-bottom: .5rem;
   font-weight: 600; }
+fieldset {
+  padding: 0;
+  border-width: 0; }
 input[type="checkbox"],
 input[type="radio"] {
   display: inline; }
@@ -322,9 +325,7 @@ form {
 
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-hr {hr
-  border-width: 0;
-  border-top: 3px solid black; }
+
 
 
 /* Clearing

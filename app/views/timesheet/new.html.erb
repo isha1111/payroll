@@ -1,8 +1,8 @@
-<div class="main-row">
+<!-- <div class="main-row">
   <h3>Timesheets for Employee</h3>
-</div>
-<form method="post" action="/timesheet/create/">
-  <table id ="table">
+</div> -->
+<!-- <form method="post" action="/timesheet/create/"> -->
+  <!-- <table id ="table">
     <td>
     <tr>
       <td>
@@ -24,9 +24,9 @@
         Hours
       </td>
     </tr>
-    <tr id="1">
+    <tr>
       <td>
-        <select name="ename" required="true">
+        <select name="ename1" id="ename1" required="true">
           <option disabled selected value> -- select an option -- </option>
           <% @employees.each do |employee| %>
             <option value="<%= employee.id %>"> <%= employee.name %></option>
@@ -34,7 +34,7 @@
         </select>
       </td>
       <td>
-        <select name="site" required="true">
+        <select name="site1" id="site1" required="true">
            <option disabled selected value> -- select an option -- </option>
           <% @sites.each do |site| %>
             <option value="<%= site.id %>"> <%= site.site_name %></option>
@@ -42,16 +42,16 @@
         </select>
       </td>
       <td>
-        <input name="day" required="true" type="date" data-date-inline-picker="true" />
+        <input name="day1" id="day1" required="true" type="date" data-date-inline-picker="true" />
       </td>
       <td>
-        <input name="stime" required="true" type="time">
+        <input name="stime1" id="stime1" required="true" type="time">
       </td>
       <td>
-        <input name="etime" required="true" type="time">
+        <input name="etime1" id="etime1" required="true" type="time">
       </td>
       <td>
-        <input name="hours" required="true" type="number">
+        <input name="hours1" id="hours1" required="true" type="number">
       </td>
     </tr>
   </table>
@@ -63,10 +63,10 @@
     <a href="/admin/login">
       <button class="btn">Cancel</button>
     </a>
-  </div>
-</form>
+  </div> -->
+<!-- </form> -->
 
-<script>
+<!-- <script>
   var obj = {};
   var counter = 1;
   document.getElementById('add-row').addEventListener('click',function addrow() {
@@ -75,17 +75,60 @@
 
   });
 
-  // $('#btn').on('click',function() {
-  //   var table = document.getElementById('table');
-  //   for(var i=counter; i>0; i--) {
-  //     obj[i] = {ename: document.getElementById('ename'+i).value, esite: document.getElementById('site'+i).value, eday: document.getElementById('day'+i).value, ehours: document.getElementById('hours'+i).value, stime: document.getElementById('stime'+i).value, etime: document.getElementById('etime'+i).value};
-  //   }
-  //   console.log(JSON.stringify(obj));
-  //   $.ajax({
-  //     url: '/timesheet/save/',
-  //     method: 'post',
-  //     data: obj
-  //   });
-  // });
+  $('#btn').on('click',function() {
+    var table = document.getElementById('table');
+    for(var i=counter; i>0; i--) {
+      obj.timesheet = {ename: document.getElementById('ename'+i).value, esite: document.getElementById('site'+i).value, eday: document.getElementById('day'+i).value, ehours: document.getElementById('hours'+i).value, stime: document.getElementById('stime'+i).value, etime: document.getElementById('etime'+i).value};
+    }
+    console.log(obj);
+    $.ajax({
+      url: '/timesheet/save/',
+      method: 'post',
+      data: obj
+    });
+  });
+
+</script> -->
+
+
+<%= form_tag '/timesheet/save' do %>
+  <div id="addusers">
+  <div class="field">
+    Employee
+    <%= select_tag("users[][employee_id]", options_for_select(@employees.collect { |emp| [emp.name, emp.id]}) ) %>
+    Site
+    <%= select_tag("users[][site_id]", options_for_select(@sites.collect { |site| [site.site_name, site.id]}) ) %>
+    Hours
+    <%= number_field_tag "users[][hours]", nil %>
+    Day
+    <%= date_field "users[][day]", nil %>
+    Start Time
+    <%= time_field "users[][startTime]", nil %>
+    End Time
+    <%= time_field "users[][endTime]", nil %>
+    Site Name
+    <%= text_field_tag "users[][site_name]", nil %>
+  </div>
+  </div>
+  <div class="actions">
+    <%= submit_tag 'Save' %>
+  </div>
+<% end %>
+
+<a href="#" id="addfields">Add a New User</a><br/>
+
+<script type="text/javascript">
+$(function() {
+        var scntDiv = $('#addusers');
+        var i = $('#addusers div').size() + 1;
+
+        $('#addfields').on('click', function() {
+                $('<div class="field">Employee<%= select_tag("users[][employee_id]", options_for_select(@employees.collect { |emp| [emp.name, emp.id]}) ) %> Site <%= select_tag("users[][site_id]", options_for_select(@sites.collect { |site| [site.site_name, site.id]}) ) %>  Hours <%= number_field_tag "users[][hours]", nil %>Day    <%= date_field "users[][day]", nil %>  Start Time<%= time_field "users[][startTime]", nil %> End Time <%= time_field "users[][endTime]", nil %> Site Name <%= text_field_tag "users[][site_name]", nil %></div>').appendTo(scntDiv);
+                i++;
+                return false;
+        });
+
+
+});
 
 </script>

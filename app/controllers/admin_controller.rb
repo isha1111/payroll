@@ -74,7 +74,7 @@ def submit
    }
   })
 	flash[:notice] = "Your Enquiry has been submitted successfully!!"
-	redirect to '/'
+	redirect_to '/'
 end
 
 end

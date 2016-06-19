@@ -57,6 +57,18 @@ class TimesheetController < ApplicationController
   end
 
   def save
+    params[:users].each do |user|
+      timesheet = Timesheet.new
+      timesheet.hours = user[:hours]
+      timesheet.startTime = user[:stime]
+      timesheet.endTime = user[:etime]
+      timesheet.day = user[:day]
+      timesheet.employee_id = user[:ename]
+      timesheet.site_id = user[:site]
+      timesheet.site_name = user[:site_name]
+      timesheet.save
+    end
+    redirect_to '/admin/login'
   end
 
   def edit

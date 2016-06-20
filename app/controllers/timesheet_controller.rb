@@ -17,7 +17,7 @@ class TimesheetController < ApplicationController
       timesheet.hours = params[:hours]
       timesheet.startTime = params[:stime]
       timesheet.endTime = params[:etime]
-      timesheet.day = params[:day]
+      timesheet.day = Date.parse(params[:day])
       timesheet.employee_id = params[:ename]
       timesheet.site_id = params[:site]
       timesheet.site_name = Site.find(params[:site]).site_name
@@ -60,10 +60,10 @@ class TimesheetController < ApplicationController
     params[:users].each do |user|
       timesheet = Timesheet.new
       timesheet.hours = user[:hours]
-      timesheet.startTime = user[:stime]
-      timesheet.endTime = user[:etime]
-      timesheet.day = user[:day]
-      timesheet.employee_id = user[:ename]
+      timesheet.startTime = Time.parse(user[:stime].to_s)
+      timesheet.endTime = Time.parse(user[:etime].to_s)
+      timesheet.day = Date.parse(user[:day].to_s)
+      timesheet.employee_id = user[:name]
       timesheet.site_id = user[:site]
       timesheet.site_name = user[:site_name]
       timesheet.save

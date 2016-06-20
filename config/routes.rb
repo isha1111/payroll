@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/userlogin' => 'user#login_user'
   get '/user/new' => 'user#new_user'
   post '/user/create' => 'user#create'
+  get '/user/login' => 'user#main'
 
   get '/site/new' => 'site#new'
   post '/site/create' => 'site#create'

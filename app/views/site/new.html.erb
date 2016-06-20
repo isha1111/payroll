@@ -1,8 +1,14 @@
-<div class="center form-container">
-  <h3>
-    Site Form
-  </h3>
+<div class="center">
+  <div class="main-row">
+    <h3>
+      Site Form
+    </h3>
+  </div>
   <form action="/site/create" method="post">
+  </br>
+    <h4>
+      Site Details
+    </h4>
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     <label>Site Name</label>
     <input name="sname" value="" type="text" required="true">

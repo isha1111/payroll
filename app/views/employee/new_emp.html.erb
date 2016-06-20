@@ -5,19 +5,19 @@
     </h3>
   </div>
   <form action="/employee/create" method="post">
-    <br>
+  </br>
     <h4>
       Basic Details
     </h4>
-    <label for="">Full Name</label><input type="text" name="fname" value="" required="true"><br>
-    <label for="">Date of Birth</label><input type="date" name="dob" value="" required="true"><br>
+    <label for="">Full Name</label><input type="text" name="fname" value="" required="true"></br>
+    <label for="">Date of Birth</label><input type="date" name="dob" value="" required="true"></br>
     <label for="">Joining Date</label><input type="date" name="joindate" required="true"></br>
     <h4>
       Contact Information
     </h4>
-    <label for="">Phone Number</label><input type="text" name="phone" value="" required="true"><br>
-    <label for="">Email</label><input type="email" name="email" value="" required="true"><br>
-    <label for="">Full Address</label><input type="text" name="address1" value="" required="true"><br>
+    <label for="">Phone Number</label><input type="text" name="phone" value="" required="true"></br>
+    <label for="">Email</label><input type="email" name="email" value="" required="true"></br>
+    <label for="">Full Address</label><input type="text" name="address1" value="" required="true"></br>
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
     <button class="btn">Save</button>

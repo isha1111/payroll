@@ -6,9 +6,7 @@
     <label for="">Password</label><input name="password" value="" type="password" required="true">
     </br>
     <button class="btn">Login</button>
-  </form>
-  <form class="form" action="/user/new" method="get">
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <button class="btn">Sign Up</button>
+    <a href="/user/new"><button class="btn">Sign Up</button></a></br>
+    <a href="/"><button class="btn">Cancel</button></a>
   </form>
 </div>

@@ -1,0 +1,9 @@
+<h5 class="center">Password/Username Recovery</h5>
+<div class="form-container form-div">
+  <form action="/recover/confirm" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <label for="">Please enter your EmailID</label>
+    <input name="email" type="email"></br>
+    <button class="btn">Submit</button>
+  </form>
+</div>

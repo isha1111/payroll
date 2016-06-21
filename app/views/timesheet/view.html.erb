@@ -1,10 +1,13 @@
 <h3>Timesheets of <%= @employee.name %></h3>
 <div class="form-container">
   <input type="hidden" id="id" value="<%= @employee.id %>">
-  <span class="center"><h5>Calculate Hours</h5></span>
-  Starting from <input type="date" id="sweek"> to <input type="date" id="eweek"></br>
+  <span class="center"><h5>Calculate Hours/Pay</h5></span>
+  Starting from <input type="date" id="sweek"> to <input type="date" id="eweek">
+  Pay rate (AUD) <input type="number" id="payrate"></br>
   <button class="btn" id="calc-hours-btn">Calculate</button></br>
-  <span id="hours-worked" style="text-align:center;"></span>
+  <span id="hours-worked"></span></br>
+  <span id="pay-rate"></span></br>
+  <span id="super"></span>
 </div>
 <div class="center form-container">
   <input type="date" id="sday"> to <input type="date" id="eday"></br>
@@ -30,13 +33,17 @@
   </div>
 </div>
 <script>
+    var pay;
     $('#calc-hours-btn').on('click', function() {
       $.ajax({
         url: "/timesheet/hours/",
         method: "get",
         data: {id: $('#id').val(), sweek: $('#sweek').val(), eweek: $('#eweek').val()}
-      }).done(function(data){
-        $('#hours-worked').text(data+" Hours Worked");
+      }).done(function(hours){
+        pay = hours * $('#payrate').val();
+        $('#hours-worked').text(" Hours Worked - "+ hours );
+        $('#pay-rate').text(" Pay - $" + parseInt(hours) * ($('#payrate').val()));
+        $('#super').text(" Super - $" + pay * .095);
       });
     });
     $('#filter-btn').on('click', function() {

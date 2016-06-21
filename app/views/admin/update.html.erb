@@ -1,0 +1,11 @@
+<div class="form-container">
+  <h5>Change Password</h5>
+  <form class="" action="/resetPassword/update" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <label for="">Username</label><input type = "text" name="username" value="" required="true" >
+    <label for="">New Password</label><input type = "password" name="password" value="" required="true" minlength="6"></br>
+    <!-- <label for="">Confirm Password</label><input type = "password" value="" required="true" minlength="6"></br> -->
+    <button class="btn">Update Password</button>
+    <a href="/"><button class="btn">Cancel</button></a>
+  </form>
+</div>

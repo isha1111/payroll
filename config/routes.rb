@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
   get '/' => 'admin#index'
+  get '/recover' => 'admin#recover'
+  post '/recover/confirm' => 'admin#confirm'
+  get '/resetPassword/:email' => 'admin#update',:constraints => { :email => /.+@.+\..*/ }
+  post '/resetPassword/update' => 'admin#update_password'
   get '/EAST-WEST-Employees' => 'admin#employee_data' , :as => :employees
   get '/EAST-WEST-Sites' => 'admin#site_data' , :as => :sites
   post '/submit' => 'admin#submit'

@@ -50,6 +50,7 @@ def create
     puts params
     admin.username = params[:username]
     admin.password = params[:password]
+    admin.email_id = params[:email]
     admin.save
     flash[:notice]= "Account Successfully Created. Please Login to Continue"
     redirect_to '/'
@@ -75,6 +76,40 @@ def submit
   })
 	flash[:notice] = "Your Enquiry has been submitted successfully!!"
 	redirect_to '/'
+end
+
+def confirm
+  admin = Admin.find_by(email_id: params[:email])
+  Pony.mail({
+  :from => 'isha.negi19@gmail.com',
+  :to => params[:email],
+  :subject => "Password recovery mail from East-West Security ",
+  :body => "Dear Admin, Your username is #{admin.username} , please visit http://localhost:3000/resetPassword/#{params[:email]} to reset your password.",
+  :via => :smtp,
+  :via_options => {
+   :address              => 'smtp.gmail.com',
+   :port                 => '587',
+   :enable_starttls_auto => true,
+   :user_name            => 'johnmann778@gmail.com',
+   :password             => 'password18*',
+   :authentication       => :plain,
+   :domain               => "localhost.localdomain"
+   }
+  })
+  flash[:notice] = "Reset password/username email has been sent to your email"
+  redirect_to '/'
+end
+
+def update_password
+  admin = Admin.find_by(username: params[:username])
+  if admin
+    admin.password = params[:password]
+    admin.save
+    flash[:notice] = "Password updated Successfully"
+    redirect_to '/'
+  else
+    flash[:notice] = "Unable to find User"
+  end
 end
 
 end

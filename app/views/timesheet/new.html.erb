@@ -1,96 +1,6 @@
 <div class="main-row">
   <h3>Timesheets for Employee</h3>
 </div>
-<!-- <form method="post" action="/timesheet/create/"> -->
-  <!-- <table id ="table">
-    <td>
-    <tr>
-      <td>
-        Employee Name
-      </td>
-      <td>
-        Work Location
-      </td>
-      <td>
-        Day
-      </td>
-      <td>
-        Start Time
-      </td>
-      <td>
-        End Time
-      </td>
-      <td>
-        Hours
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <select name="ename1" id="ename1" required="true">
-          <option disabled selected value> -- select an option -- </option>
-          <% @employees.each do |employee| %>
-            <option value="<%= employee.id %>"> <%= employee.name %></option>
-          <% end %>
-        </select>
-      </td>
-      <td>
-        <select name="site1" id="site1" required="true">
-           <option disabled selected value> -- select an option -- </option>
-          <% @sites.each do |site| %>
-            <option value="<%= site.id %>"> <%= site.site_name %></option>
-          <% end %>
-        </select>
-      </td>
-      <td>
-        <input name="day1" id="day1" required="true" type="date" data-date-inline-picker="true" />
-      </td>
-      <td>
-        <input name="stime1" id="stime1" required="true" type="time">
-      </td>
-      <td>
-        <input name="etime1" id="etime1" required="true" type="time">
-      </td>
-      <td>
-        <input name="hours1" id="hours1" required="true" type="number">
-      </td>
-    </tr>
-  </table>
-  <div class="center">
-    <a id="add-row" style="color:red;">Add more</a>
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    </br>
-    <button class="btn" id="btn">Save</button>
-    <a href="/admin/login">
-      <button class="btn">Cancel</button>
-    </a>
-  </div> -->
-<!-- </form> -->
-
-<!-- <script>
-  var obj = {};
-  var counter = 1;
-  document.getElementById('add-row').addEventListener('click',function addrow() {
-    counter ++;
-    $('#table').append("<tr id='"+counter+"'><td><select id='ename"+counter+"'><option disabled selected value> -- select an option -- </option><% @employees.each do |employee| %><option value='<%= employee.id %>'> <%= employee.name %></option><% end %></select></td> <td>  <select id='site"+counter+"'><option disabled selected value> -- select an option -- </option><% @sites.each do |site| %> <option value='<%= site.id %>'> <%= site.site_name %></option><% end %>  </select></td>  <td><input id='day"+counter+"' type='date' data-date-inline-picker='true' /></td><td><input id='stime"+counter+"' type='time'></td><td><input id='etime"+counter+"' type='time'></td><td><input id='hours"+counter+"' type='number' step='0.01'></td></tr>");
-
-  });
-
-  $('#btn').on('click',function() {
-    var table = document.getElementById('table');
-    for(var i=counter; i>0; i--) {
-      obj.timesheet = {ename: document.getElementById('ename'+i).value, esite: document.getElementById('site'+i).value, eday: document.getElementById('day'+i).value, ehours: document.getElementById('hours'+i).value, stime: document.getElementById('stime'+i).value, etime: document.getElementById('etime'+i).value};
-    }
-    console.log(obj);
-    $.ajax({
-      url: '/timesheet/save/',
-      method: 'post',
-      data: obj
-    });
-  });
-
-</script> -->
-
-
 <%= form_tag '/timesheet/save' do %>
   <div id="addusers">
   <div class="field">
@@ -110,7 +20,7 @@
     <%= text_field_tag "users[][site_name]", nil %>
   </div>
   </div>
-  <a href="#" id="addfields" class="center">Add another Timesheet</a>
+  <a href="#" id="addfields" class="center link">Add another Timesheet</a>
   <div class="center">
     <button class="btn">Save</button>
     <a href="/admin/login"><button class="btn">Cancel</button></a>

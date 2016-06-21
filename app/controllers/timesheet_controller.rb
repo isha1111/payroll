@@ -70,6 +70,7 @@ class TimesheetController < ApplicationController
       timesheet.site_name = user[:site_name]
       timesheet.save
     end
+    flash[:notice] = "Timesheets added successfully"
     redirect_to '/admin/login'
   end
 

@@ -69,20 +69,3 @@
 <span id="employee-list"></span>
 
 <div class="center"><strong>Download Sites Data as </strong><%= link_to "Excel Sheet", sites_path(format: "xls") %></div>
-
-<script type="text/javascript">
-$('#employee-working').on('click', function () {
-  $.ajax({
-    url: "/site/employee/",
-    method: 'get',
-    data: {id: $('#site-id').val()}
-  }).done(function(data){
-    console.log(data);
-    $('#employee-list').text(data);
-  });
-});
-
-</script>
-
-<footer>
-</footer>

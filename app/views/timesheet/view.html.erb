@@ -9,10 +9,14 @@
   <span id="pay-rate"></span></br>
   <span id="super"></span>
 </div>
+
 <div class="center form-container">
   <input type="date" id="sday"> to <input type="date" id="eday"></br>
   <button id="filter-btn" class="btn">Filter Results</button>
-  <a href="/admin/login"><button class="btn">Go Back</button></a></br>
+  <a href="/admin/login">
+    <button class="btn">Go Back</button>
+  </a>
+  </br>
   <div id="employee-data">
     <table>
     <tr>
@@ -32,6 +36,7 @@
     </table>
   </div>
 </div>
+
 <script>
     var pay;
     $('#calc-hours-btn').on('click', function() {

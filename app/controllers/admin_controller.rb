@@ -19,6 +19,7 @@ end
 
 def employee_data
   @employees = Employee.all
+  # exporting data to csv
   respond_to do |format|
     format.html
     format.csv { send_data @employees.to_csv }
@@ -28,6 +29,7 @@ end
 
 def site_data
   @sites = Site.all
+  # exporting data to csv
   respond_to do |format|
     format.html
     format.csv { send_data @sites.to_csv }
@@ -84,7 +86,7 @@ def confirm
   :from => 'isha.negi19@gmail.com',
   :to => params[:email],
   :subject => "Password recovery mail from East-West Security ",
-  :body => "Dear Admin, Your username is #{admin.username} , please visit http://localhost:3000/resetPassword/#{params[:email]} to reset your password.",
+  :body => "Dear Admin, Your username is #{admin.username} , please visit http://payrollmanage.herokuapp.com/resetPassword/#{params[:email]} to reset your password.",
   :via => :smtp,
   :via_options => {
    :address              => 'smtp.gmail.com',

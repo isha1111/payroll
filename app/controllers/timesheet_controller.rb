@@ -42,11 +42,13 @@ class TimesheetController < ApplicationController
     employee = Employee.find_by(id:params[:id])
     days = []
     day = Date.parse(params[:sweek])
+    # getting all the days and pushing into an array
     while day <= Date.parse(params[:eweek]) do
       days.push(day)
       day = day.next
     end
     @total = 0
+    # calculating hours for each day
     days.each do |day|
       hour = Timesheet.where(employee_id:params[:id], day:day)
       if hour.length != 0

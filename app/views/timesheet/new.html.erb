@@ -1,29 +1,44 @@
 <div class="main-row">
   <h3>Timesheets for Employee</h3>
 </div>
+<!-- Create Timesheet Form -->
 <%= form_tag '/timesheet/save' do %>
   <div id="addusers">
-  <div class="field">
-    Employee
-    <select id="users__name" name="users[][name]" > <% @employees.each do |employee| %><option value= "<%= employee.id %>"> <%=  employee.name %></option> <% end %> </select>
-    Site
-    <select id="users__site" name="users[][site]" > <% @sites.each do |site| %><option value= "<%= site.id %>"> <%=  site.site_name %></option> <% end %> </select>
-    Hours
-    <%= number_field_tag "users[][hours]", nil %>
-    Day
-    <%= date_field "users[][day]", nil %>
-    Start Time
-    <%= time_field "users[][stime]", nil %>
-    End Time
-    <%= time_field "users[][etime]", nil %>
-    Site Name
-    <%= text_field_tag "users[][site_name]", nil %>
-  </div>
+    <div class="field">
+      Employee
+        <select id="users__name" name="users[][name]" >
+          <% @employees.each do |employee| %>
+            <option value= "<%= employee.id %>">
+              <%=  employee.name %>
+            </option>
+          <% end %>
+        </select>
+      Site
+        <select id="users__site" name="users[][site]" >
+          <% @sites.each do |site| %>
+            <option value= "<%= site.id %>">
+              <%=  site.site_name %>
+            </option>
+          <% end %>
+        </select>
+      Hours
+        <%= number_field_tag "users[][hours]", nil %>
+      Day
+        <%= date_field "users[][day]", nil %>
+      Start Time
+        <%= time_field "users[][stime]", nil %>
+      End Time
+        <%= time_field "users[][etime]", nil %>
+      Site Name
+        <%= text_field_tag "users[][site_name]", nil %>
+    </div>
   </div>
   <a href="#" id="addfields" class="center link">Add another Timesheet</a>
   <div class="center">
     <button class="btn">Save</button>
-    <a href="/admin/login"><button class="btn">Cancel</button></a>
+    <a href="/admin/login">
+      <button class="btn">Cancel</button>
+    </a>
   </div>
 <% end %>
 

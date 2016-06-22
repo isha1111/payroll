@@ -10,18 +10,21 @@
 .row-btn {
   padding: 0 10px;
 }
+
 table {
   margin: 0 auto;
 }
+
 h3 {
   text-align: center;
   padding-top: 15px;
 }
+
 footer {
   padding-top: 2px;
   padding-bottom: 5px;
   // background-color: $darkest-color;
-  font-size: 20px;
+  font-size: 17px;
   color: white;
   position: fixed;
   bottom: 0;
@@ -29,6 +32,11 @@ footer {
   width: 100%;
   text-align: center;
 }
+
+#services-div {
+  margin-bottom: 50px;
+}
+
 .form-div {
   text-align: center;
 }

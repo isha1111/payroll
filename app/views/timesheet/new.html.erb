@@ -41,19 +41,17 @@
     </a>
   </div>
 <% end %>
-
 <script type="text/javascript">
+
+// function to add timesheet row
 $(function() {
         var scntDiv = $('#addusers');
-        var i = $('#addusers div').size() + 1;
-
+        var i = $('#addusers').size() + 1;
         $('#addfields').on('click', function() {
-                $('<div class="field">Employee <select id="users__name'+ i + '" name="users[][name]" > <% @employees.each do |employee| %> <option value= "<%= employee.id %>"> <%=  employee.name %> </option> <% end %> </select> Site  <select id="users__site'+ i + '"name="users[][site]" > <% @sites.each do |site| %><option value= "<%= site.id %>"> <%=  site.site_name %></option> <% end %> </select> Hours <%= number_field_tag "users[][hours]", nil %>Day    <%= date_field "users[][day]", nil %>  Start Time<%= time_field "users[][stime]", nil %> End Time <%= time_field "users[][etime]", nil %> Site Name <%= text_field_tag "users[][site_name]", nil %></div>').appendTo(scntDiv);
-                i++;
-                return false;
+            $('<div class="field">Employee <select id="users__name'+ i + '" name="users[][name]" > <% @employees.each do |employee| %> <option value= "<%= employee.id %>"> <%=  employee.name %> </option> <% end %> </select> Site  <select id="users__site'+ i + '"name="users[][site]" > <% @sites.each do |site| %><option value= "<%= site.id %>"> <%=  site.site_name %></option> <% end %> </select> Hours <%= number_field_tag "users[][hours]", nil %>Day    <%= date_field "users[][day]", nil %>  Start Time<%= time_field "users[][stime]", nil %> End Time <%= time_field "users[][etime]", nil %> Site Name <%= text_field_tag "users[][site_name]", nil %></div>').appendTo(scntDiv);
+            i++;
+            return false;
         });
-
-
 });
 
 </script>

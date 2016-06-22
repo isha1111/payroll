@@ -1,6 +1,6 @@
 <h3>Timesheets of <%= @employee.name %></h3>
 <div class="form-container">
-  <input type="hidden" id="id" value="<%= @employee.id %>">
+  <input type="hidden" id="ts-id" value="<%= @employee.id %>">
   <span class="center"><h5>Calculate Hours/Pay</h5></span>
   Starting from <input type="date" id="sweek"> to <input type="date" id="eweek">
   Pay rate (AUD) <input type="number" id="payrate"></br>
@@ -11,7 +11,7 @@
 </div>
 
 <div class="center form-container">
-  <input type="date" id="sday"> to <input type="date" id="eday"></br>
+  <input type="date" id="ts-sday"> to <input type="date" id="ts-eday"></br>
   <button id="filter-btn" class="btn">Filter Results</button>
   <a href="/admin/login">
     <button class="btn">Go Back</button>
@@ -38,37 +38,41 @@
 </div>
 
 <script>
-    var pay;
-    $('#calc-hours-btn').on('click', function() {
-      $.ajax({
-        url: "/timesheet/hours/",
-        method: "get",
-        data: {id: $('#id').val(), sweek: $('#sweek').val(), eweek: $('#eweek').val()}
-      }).done(function(hours){
-        pay = hours * $('#payrate').val();
-        $('#hours-worked').text(" Hours Worked - "+ hours );
-        $('#pay-rate').text(" Pay - $" + parseInt(hours) * ($('#payrate').val()));
-        $('#super').text(" Super - $" + pay * .095);
-      });
-    });
-    $('#filter-btn').on('click', function() {
-      $.ajax({
-        url: "/timesheet/days/",
-        method: "get",
-        data: {id: $('#id').val(), sday: $('#sday').val(), eday: $('#eday').val()}
-      }).done(function(data) {
-        $('#employee-data').empty();
-        $('#employee-data').append("<span>Maximum data 30 days</span>");
-        $('#employee-data').append("<table id='employee-table'></table>");
-        $('#employee-table').append("<tr><th>Hours</th><th>Day</th><th>Site</th></tr>");
-        for(var i=0; i<30; i++) {
-          if (data[i] != undefined) {
-            var hours = data[i]["hours"];
-            var day = data[i]["day"];
-            var site = data[i]["site_name"]
-            $('#employee-table').append("<tr><td>"+hours+"</td><td>"+day+"</td><td>"+site+"</td></tr>");
-          }
-        }
-      });
-    });
+// function to calculate hours worked
+var pay;
+$('#calc-hours-btn').on('click', function() {
+  $.ajax({
+    url: "/timesheet/hours/",
+    method: "get",
+    data: {id: $('#id').val(), sweek: $('#sweek').val(), eweek: $('#eweek').val()}
+  }).done(function(hours){
+    pay = hours * $('#payrate').val();
+    $('#hours-worked').text(" Hours Worked - "+ hours );
+    $('#pay-rate').text(" Pay - $" + parseInt(hours) * ($('#payrate').val()));
+    $('#super').text(" Super - $" + pay * 0.095);
+  });
+});
+
+// function to filter timesheet
+$('#filter-btn').on('click', function() {
+  $.ajax({
+    url: "/timesheet/days/",
+    method: "get",
+    data: {id: $('#ts-id').val(), sday: $('#ts-sday').val(), eday: $('#ts-eday').val()}
+  }).done(function(data) {
+    $('#employee-data').empty();
+    $('#employee-data').append("<span>Maximum data 30 days</span>");
+    $('#employee-data').append("<table id='ts-employee-table'></table>");
+    $('#ts-employee-table').append("<tr><th>Hours</th><th>Day</th><th>Site</th></tr>");
+    for(var x=0; x<30; x++) {
+      if (data[x] != undefined) {
+        var hours = data[x]["hours"];
+        var day = data[x]["day"];
+        var site = data[x]["site_name"]
+        $('#ts-employee-table').append("<tr><td>"+hours+"</td><td>"+day+"</td><td>"+site+"</td></tr>");
+      }
+    }
+  });
+});
+
 </script>
